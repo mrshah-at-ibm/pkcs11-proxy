@@ -532,6 +532,7 @@ static CK_RV call_lookup(CallState ** ret)
 
 	pthread_mutex_unlock(&call_state_mutex);
 
+    cs = NULL;
 	if (cs == NULL) {
 		cs = calloc(1, sizeof(CallState));
 		if (cs == NULL)
@@ -1344,14 +1345,14 @@ static CK_RV rpc_C_Initialize(CK_VOID_PTR init_args)
 
 		/* This process has called C_Initialize already */
 		if (pid == pkcs11_initialized_pid) {
-			warning(("C_Initialize called twice for same process"));
-			ret = CKR_CRYPTOKI_ALREADY_INITIALIZED;
-			goto done;
+			warning(("IGNORING: C_Initialize called twice for same process"));
+//			ret = CKR_CRYPTOKI_ALREADY_INITIALIZED;
+//			goto done;
 		}
 	}
 
 	/* Lookup the socket path, append '.pkcs11' if it is a domain socket. */
-	if (pkcs11_socket_path[0] == 0) {
+//	if (pkcs11_socket_path[0] == 0) {
 		path = getenv("PKCS11_PROXY_SOCKET");
 		if (path && path[0]) {
 			if ((! strncmp("tcp://", path, 6)) ||
@@ -1368,7 +1369,7 @@ static CK_RV rpc_C_Initialize(CK_VOID_PTR init_args)
 			ret =  CKR_FUNCTION_NOT_SUPPORTED;
 			goto done;
 		}
-	}
+//	}
 
 	/* If socket path indicates TLS, make sure tls_psk_key_filename is populated. */
 	if (! strncmp("tls://", pkcs11_socket_path, 6)) {
