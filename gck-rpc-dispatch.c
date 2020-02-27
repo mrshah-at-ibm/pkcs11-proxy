@@ -1047,7 +1047,17 @@ static CK_RV rpc_C_InitToken(CallState * cs)
 
 	BEGIN_CALL(C_InitToken);
 	IN_ULONG(slot_id);
+
+	debug(("Pin[0]: %c\n", pin[0]));
+	debug(("Pin[1]: %c\n", pin[1]));
+	debug(("Pin[2]: %c\n", pin[2]));
+	debug(("Pin[3]: %c\n", pin[3]));
+
 	IN_BYTE_ARRAY(pin, pin_len);
+	for(int i = 0; i < 32; i++) {
+		debug(("Label[%d]: %c\n", i, label[i]));
+	}
+
 	IN_SPACE_STRING(label, 32);
 	PROCESS_CALL((slot_id, pin, pin_len, label));
 	END_CALL;
