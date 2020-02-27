@@ -1558,7 +1558,7 @@ rpc_C_InitToken(CK_SLOT_ID id, CK_UTF8CHAR_PTR pin, CK_ULONG pin_len,
 
 	IN_BYTE_ARRAY(pin, pin_len);
 	for(int i = 0; i < 32; i++) {
-		debug(("Label[%d]: %c\n", i, label[i]))
+		debug(("Label[%d]: %c\n", i, label[i]));
 	}
 	IN_SPACE_STRING(label, 32);
 	PROCESS_CALL;
