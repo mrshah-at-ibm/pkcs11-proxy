@@ -2340,6 +2340,8 @@ void gck_rpc_layer_accept(GckRpcTlsPskState *tls)
 	socklen_t addrlen;
 	int new_fd;
 
+	fprintf(stderr, "Inside gck_rpc_later_accept\n");
+
 	assert(pkcs11_socket != -1);
 
 	/* Cleanup any completed dispatch threads */
@@ -2363,6 +2365,7 @@ void gck_rpc_layer_accept(GckRpcTlsPskState *tls)
 		return;
 	}
 
+	fprintf(stderr, "accepted\n");
 	ds = calloc(1, sizeof(DispatchState));
 	if (ds == NULL) {
 		gck_rpc_warn("out of memory");
@@ -2393,12 +2396,14 @@ void gck_rpc_layer_accept(GckRpcTlsPskState *tls)
 
 static int _inetd_read(CallState *cs, void *data, size_t len)
 {
+	fprintf(stderr, "Inside _inetd_read\n");
 	assert(cs->sock >= 0);
 	return read(cs->sock, data, len);
 }
 
 static int _inetd_write(CallState *cs, void *data, size_t len)
 {
+	fprintf(stderr, "Inside _inetd_write\n");
 	assert(cs->sock >= 0);
 	return write(cs->sock, data, len);
 }
@@ -2406,6 +2411,8 @@ static int _inetd_write(CallState *cs, void *data, size_t len)
 void gck_rpc_layer_inetd(CK_FUNCTION_LIST_PTR module)
 {
    CallState cs;
+
+	fprintf(stderr, "Inside gcp_rpc_later_inetd\n");
 
    memset(&cs, 0, sizeof(cs));
    cs.sock = STDIN_FILENO;
@@ -2429,6 +2436,8 @@ static int _get_listening_socket(const char *proto, const char *host, const char
 	char hoststr[NI_MAXHOST], portstr[NI_MAXSERV];
 	struct addrinfo *ai, *first, hints;
 	int res, sock, one = 1;
+
+	fprintf(stderr, "Inside _get_listening_socket\n");
 
 	memset(&hints, 0, sizeof(struct addrinfo));
 	hints.ai_flags = AI_PASSIVE;		/* Want addr for bind() */

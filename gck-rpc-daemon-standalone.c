@@ -207,6 +207,8 @@ enum {
 
 int main(int argc, char *argv[])
 {
+	fprintf(stderr, "Entering main\n");
+
 	CK_C_GetFunctionList func_get_list;
 	CK_FUNCTION_LIST_PTR funcs;
 	void *module;
@@ -223,6 +225,7 @@ int main(int argc, char *argv[])
 
         openlog("pkcs11-proxy",LOG_CONS|LOG_PID,LOG_DAEMON);
 
+	fprintf(stderr, "Loading library: $s\n", argv[1]);
 	/* Load the library */
 	module = dlopen(argv[1], RTLD_NOW);
 	if (!module) {
@@ -251,6 +254,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
+	fprintf(stderr, "Successfully loaded library\n");
 	/* RPC layer expects initialized module */
 	memset(&init_args, 0, sizeof(init_args));
 	init_args.flags = CKF_OS_LOCKING_OK;
@@ -272,6 +276,8 @@ int main(int argc, char *argv[])
 	tls = NULL;
 	tls_psk_keyfile = NULL;
 	if (! strncmp("tls://", path, 6)) {
+		fprintf(stderr, "TLS is enabled\n");
+
 		tls_psk_keyfile = getenv("PKCS11_PROXY_TLS_PSK_FILE");
 		if (! tls_psk_keyfile || ! tls_psk_keyfile[0]) {
 			fprintf(stderr, "key file must be specified for tls:// socket.\n");
@@ -288,6 +294,8 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "TLS-PSK initialization failed");
 			exit(1);
 		}
+	} else {
+		fprintf(stderr, "TLS is disabled\n");
 	}
 
 	if (strcmp(path,"-") == 0) {
@@ -295,6 +303,8 @@ int main(int argc, char *argv[])
 		sock = 0;
 		mode = GCP_RPC_DAEMON_MODE_INETD;
 	} else {
+		fprintf(stderr, "Initializing RPC layer\n");
+
 		/* Do some initialization before enabling seccomp. */
 		sock = gck_rpc_layer_initialize(path, funcs);
 		if (sock == -1)
