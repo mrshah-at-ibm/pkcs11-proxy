@@ -10,6 +10,7 @@ set(PKCS11_PROXY_SRCS gck-rpc-module.c gck-rpc-message.c gck-rpc-util.c egg-buff
 set(PKCS11_DAEMON_SRCS egg-buffer.c gck-rpc-daemon-standalone.c gck-rpc-dispatch.c gck-rpc-message.c gck-rpc-util.c syscall-reporter.c syscall-names.h gck-rpc-tls-psk.c)
 
 add_definitions(-Wall)
+add_definitions(-D_DEBUG)
 add_library(pkcs11-proxy SHARED ${PKCS11_PROXY_SRCS})
 
 # Disable console when building Win32 binary in release mode
