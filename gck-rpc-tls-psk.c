@@ -64,6 +64,8 @@ static char tls_psk_key_filename[MAXPATHLEN] = { 0, };
 static int
 _tls_psk_to_hex(char val)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	if (val >= '0' && val <= '9')
 		return val - '0';
 	if (val >= 'a' && val <= 'f')
@@ -86,6 +88,8 @@ _tls_psk_to_hex(char val)
 static int
 _tls_psk_decode_key(const char *identity, const char *hexkey, unsigned char *psk, unsigned int max_psk_len)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int psk_len, i;
 
 	/* check that length of the key is even */
@@ -138,6 +142,8 @@ _tls_psk_decode_key(const char *identity, const char *hexkey, unsigned char *psk
  */
 int _fgets(char *buf, unsigned int len, const int fd)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int bytes;
 
 	bytes = 0;
@@ -176,6 +182,8 @@ static unsigned int
 _tls_psk_server_cb(SSL *ssl, const char *identity,
 		   unsigned char *psk, unsigned int max_psk_len)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	char line[1024], *hexkey;
 	unsigned int psk_len;
 	int i, fd;
@@ -235,6 +243,8 @@ _tls_psk_client_cb(SSL *ssl, const char *hint,
 		   char *identity, unsigned int max_identity_len,
 		   unsigned char *psk, unsigned int max_psk_len)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	/* Client tells server which identity it wants to use in ClientKeyExchange */
 	snprintf(identity, max_identity_len, "%s", tls_psk_identity);
 
@@ -251,6 +261,8 @@ int
 gck_rpc_init_tls_psk(GckRpcTlsPskState *state, const char *key_filename,
 		     const char *identity, enum gck_rpc_tls_psk_caller caller)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	char *tls_psk_ciphers = PKCS11PROXY_TLS_PSK_CIPHERS;
 
 	if (state->initialized == 1) {
@@ -305,6 +317,8 @@ gck_rpc_init_tls_psk(GckRpcTlsPskState *state, const char *key_filename,
 int
 gck_rpc_start_tls(GckRpcTlsPskState *state, int sock)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int res;
 	char buf[256];
 
@@ -344,6 +358,8 @@ gck_rpc_start_tls(GckRpcTlsPskState *state, int sock)
 void
 gck_rpc_close_tls(GckRpcTlsPskState *state)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	if (state->ssl_ctx) {
 		SSL_CTX_free(state->ssl_ctx);
 		state->ssl_ctx = NULL;
@@ -362,6 +378,8 @@ gck_rpc_close_tls(GckRpcTlsPskState *state)
 int
 gck_rpc_tls_write_all(GckRpcTlsPskState *state, void *data, unsigned int len)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int bytes, error;
 	char buf[256];
 
@@ -389,6 +407,8 @@ gck_rpc_tls_write_all(GckRpcTlsPskState *state, void *data, unsigned int len)
 int
 gck_rpc_tls_read_all(GckRpcTlsPskState *state, void *data, unsigned int len)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int bytes, error;
 	char buf[256];
 
