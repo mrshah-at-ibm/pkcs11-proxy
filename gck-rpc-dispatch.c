@@ -2524,9 +2524,9 @@ int gck_rpc_layer_initialize(const char *prefix, CK_FUNCTION_LIST_PTR module)
 	struct sockaddr_un addr;
 	int sock;
 
-#ifdef _DEBUG
+// #ifdef _DEBUG
 	GCK_RPC_CHECK_CALLS();
-#endif
+// #endif
 
 	assert(module);
 	assert(prefix);

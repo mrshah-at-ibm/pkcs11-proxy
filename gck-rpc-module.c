@@ -1295,9 +1295,9 @@ static CK_RV rpc_C_Initialize(CK_VOID_PTR init_args)
 
 	debug(("C_Initialize: enter"));
 
-#ifdef _DEBUG
+// #ifdef _DEBUG
 	GCK_RPC_CHECK_CALLS();
-#endif
+// #endif
 
 	pthread_mutex_lock(&init_mutex);
 

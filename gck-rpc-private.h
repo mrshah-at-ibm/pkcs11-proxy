@@ -206,10 +206,10 @@ static const GckRpcCall gck_rpc_calls[] = {
 	{GCK_RPC_CALL_C_GenerateRandom, "C_GenerateRandom", "ufy", "ay"},
 };
 
-#ifdef _DEBUG
+// #ifdef _DEBUG
 #define GCK_RPC_CHECK_CALLS() \
 	{ int i; for (i = 0; i < GCK_RPC_CALL_MAX; ++i) assert (gck_rpc_calls[i].call_id == i); }
-#endif
+// #endif
 
 #define GCK_RPC_HANDSHAKE \
 	"PRIVATE-GNOME-KEYRING-PKCS11-PROTOCOL-V-3"
