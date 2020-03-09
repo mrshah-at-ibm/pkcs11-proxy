@@ -2340,7 +2340,7 @@ void gck_rpc_layer_accept(GckRpcTlsPskState *tls)
 	socklen_t addrlen;
 	int new_fd;
 
-	fprintf(stderr, "Inside gck_rpc_later_accept\n");
+	fprintf(stderr, "Inside gck_rpc_layer_accept\n");
 
 	assert(pkcs11_socket != -1);
 
@@ -2380,6 +2380,7 @@ void gck_rpc_layer_accept(GckRpcTlsPskState *tls)
 	ds->cs.addrlen = addrlen;
 	ds->cs.tls = tls;
 
+	fprintf(stderr, "Starting dispatch thread\n");
 	error = pthread_create(&ds->thread, NULL,
 			       run_dispatch_thread, &(ds->cs));
 	if (error) {
@@ -2389,9 +2390,14 @@ void gck_rpc_layer_accept(GckRpcTlsPskState *tls)
 		return;
 	}
 
+	fprintf(stderr, "Started dispatch thread\n");
 	ds->next = pkcs11_dispatchers;
 	pkcs11_dispatchers = ds;
+	fprintf(stderr, "Unlocking mutex\n");
+
 	pthread_mutex_unlock(&pkcs11_dispatchers_mutex);
+	fprintf(stderr, "Exiting gck_rpc_layer_accept\n");
+
 }
 
 static int _inetd_read(CallState *cs, void *data, size_t len)
