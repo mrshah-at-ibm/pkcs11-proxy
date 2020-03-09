@@ -129,6 +129,8 @@ static int _install_dispatch_syscall_filter(int use_tls);
 
 void gck_rpc_log(const char *msg, ...)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	va_list ap;
 
 	va_start(ap, msg);
@@ -147,6 +149,8 @@ void gck_rpc_log(const char *msg, ...)
 
 static int call_init(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(cs);
 
 	cs->req = gck_rpc_message_new((EggBufferAllocator) realloc);
@@ -163,6 +167,8 @@ static int call_init(CallState * cs)
 
 static void *call_alloc(CallState * cs, size_t length)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	void **data;
 
 	assert(cs);
@@ -187,6 +193,8 @@ static void *call_alloc(CallState * cs, size_t length)
 
 static void call_reset(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	void *allocated;
 	void **data;
 
@@ -208,6 +216,8 @@ static void call_reset(CallState * cs)
 
 static void call_uninit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(cs);
 
 	/* Close any open sessions. Without this, the application won't be able
@@ -230,6 +240,8 @@ static CK_RV
 proto_read_byte_buffer(CallState * cs, CK_BYTE_PTR * buffer,
 		       CK_ULONG_PTR * n_buffer)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 	uint8_t flags;
 	uint32_t length;
@@ -271,6 +283,8 @@ proto_read_byte_buffer(CallState * cs, CK_BYTE_PTR * buffer,
 static CK_RV
 proto_read_byte_array(CallState * cs, CK_BYTE_PTR * array, CK_ULONG * n_array)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 	const unsigned char *data;
 	unsigned char valid;
@@ -313,6 +327,8 @@ static CK_RV
 proto_write_byte_array(CallState * cs, CK_BYTE_PTR array, CK_ULONG_PTR len,
 		       CK_RV ret)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(cs);
 
 	/*
@@ -342,6 +358,8 @@ static CK_RV
 proto_read_ulong_buffer(CallState * cs, CK_ULONG_PTR * buffer,
 			CK_ULONG * n_buffer)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 	uint32_t length;
 
@@ -377,6 +395,8 @@ static CK_RV
 proto_write_ulong_array(CallState * cs, CK_ULONG_PTR array, CK_ULONG len,
 			CK_RV ret)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(cs);
 
 	/*
@@ -406,6 +426,8 @@ static CK_RV
 proto_read_attribute_buffer(CallState * cs, CK_ATTRIBUTE_PTR * result,
 			    CK_ULONG * n_result)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_ATTRIBUTE_PTR attrs;
 	GckRpcMessage *msg;
 	uint32_t n_attrs, i;
@@ -465,6 +487,8 @@ static CK_RV
 proto_read_attribute_array(CallState * cs, CK_ATTRIBUTE_PTR * result,
 			   CK_ULONG * n_result)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_ATTRIBUTE_PTR attrs;
 	const unsigned char *data;
 	unsigned char valid;
@@ -559,6 +583,8 @@ static CK_RV
 proto_write_attribute_array(CallState * cs, CK_ATTRIBUTE_PTR array,
 			    CK_ULONG len, CK_RV ret)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(cs);
 
 	/*
@@ -588,6 +614,8 @@ proto_write_attribute_array(CallState * cs, CK_ATTRIBUTE_PTR array,
 
 static CK_RV proto_read_space_string(CallState * cs, CK_UTF8CHAR_PTR * val, CK_ULONG length)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 	const unsigned char *data;
 	size_t n_data;
@@ -616,6 +644,8 @@ static CK_RV proto_read_space_string(CallState * cs, CK_UTF8CHAR_PTR * val, CK_U
 
 static CK_RV proto_read_mechanism(CallState * cs, CK_MECHANISM_PTR mech)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 	const unsigned char *data;
 	uint32_t value;
@@ -647,6 +677,8 @@ static CK_RV proto_read_mechanism(CallState * cs, CK_MECHANISM_PTR mech)
 
 static CK_RV proto_write_info(CallState * cs, CK_INFO_PTR info)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 
 	assert(cs);
@@ -667,6 +699,8 @@ static CK_RV proto_write_info(CallState * cs, CK_INFO_PTR info)
 
 static CK_RV proto_write_slot_info(CallState * cs, CK_SLOT_INFO_PTR info)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 
 	assert(cs);
@@ -687,6 +721,8 @@ static CK_RV proto_write_slot_info(CallState * cs, CK_SLOT_INFO_PTR info)
 
 static CK_RV proto_write_token_info(CallState * cs, CK_TOKEN_INFO_PTR info)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 
 	assert(cs);
@@ -720,6 +756,8 @@ static CK_RV proto_write_token_info(CallState * cs, CK_TOKEN_INFO_PTR info)
 static CK_RV
 proto_write_mechanism_info(CallState * cs, CK_MECHANISM_INFO_PTR info)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 
 	assert(cs);
@@ -737,6 +775,8 @@ proto_write_mechanism_info(CallState * cs, CK_MECHANISM_INFO_PTR info)
 
 static CK_RV proto_write_session_info(CallState * cs, CK_SESSION_INFO_PTR info)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 
 	assert(cs);
@@ -860,6 +900,8 @@ static CK_RV proto_write_session_info(CallState * cs, CK_SESSION_INFO_PTR info)
 
 static CK_RV rpc_C_Initialize(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_BYTE_PTR handshake;
 	CK_ULONG n_handshake;
 	CK_RV ret = CKR_OK;
@@ -895,6 +937,8 @@ static CK_RV rpc_C_Initialize(CallState * cs)
 
 static CK_RV rpc_C_Finalize(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_ULONG i;
 	CK_RV ret;
 	DispatchState *ds, *next;
@@ -954,6 +998,8 @@ static CK_RV rpc_C_Finalize(CallState * cs)
 
 static CK_RV rpc_C_GetInfo(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_INFO info;
 
 	BEGIN_CALL(C_GetInfo);
@@ -964,6 +1010,8 @@ static CK_RV rpc_C_GetInfo(CallState * cs)
 
 static CK_RV rpc_C_GetSlotList(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_BBOOL token_present;
 	CK_SLOT_ID_PTR slot_list;
 	CK_ULONG count;
@@ -978,6 +1026,8 @@ static CK_RV rpc_C_GetSlotList(CallState * cs)
 
 static CK_RV rpc_C_GetSlotInfo(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SLOT_ID slot_id;
 	CK_SLOT_INFO info;
 
@@ -992,6 +1042,8 @@ static CK_RV rpc_C_GetSlotInfo(CallState * cs)
 
 static CK_RV rpc_C_GetTokenInfo(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SLOT_ID slot_id;
 	CK_TOKEN_INFO info;
 
@@ -1006,6 +1058,8 @@ static CK_RV rpc_C_GetTokenInfo(CallState * cs)
 
 static CK_RV rpc_C_GetMechanismList(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SLOT_ID slot_id;
 	CK_MECHANISM_TYPE_PTR mechanism_list;
 	CK_ULONG count;
@@ -1022,6 +1076,8 @@ static CK_RV rpc_C_GetMechanismList(CallState * cs)
 
 static CK_RV rpc_C_GetMechanismInfo(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SLOT_ID slot_id;
 	CK_MECHANISM_TYPE type;
 	CK_MECHANISM_INFO info;
@@ -1038,6 +1094,8 @@ static CK_RV rpc_C_GetMechanismInfo(CallState * cs)
 
 static CK_RV rpc_C_InitToken(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SLOT_ID slot_id;
 	CK_UTF8CHAR_PTR pin;
 	CK_ULONG pin_len;
@@ -1055,6 +1113,8 @@ static CK_RV rpc_C_InitToken(CallState * cs)
 
 static CK_RV rpc_C_WaitForSlotEvent(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_FLAGS flags;
 	CK_SLOT_ID slot_id;
 
@@ -1070,6 +1130,8 @@ static CK_RV rpc_C_WaitForSlotEvent(CallState * cs)
 
 static CK_RV rpc_C_OpenSession(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SLOT_ID slot_id;
 	CK_FLAGS flags;
 	CK_SESSION_HANDLE session;
@@ -1101,6 +1163,8 @@ static CK_RV rpc_C_OpenSession(CallState * cs)
 
 static CK_RV rpc_C_CloseSession(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 
 	BEGIN_CALL(C_CloseSession);
@@ -1126,6 +1190,8 @@ static CK_RV rpc_C_CloseSession(CallState * cs)
 
 static CK_RV rpc_C_CloseAllSessions(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SLOT_ID slot_id;
 	CK_SLOT_INFO slotInfo;
 	int i;
@@ -1166,6 +1232,8 @@ static CK_RV rpc_C_CloseAllSessions(CallState * cs)
 
 static CK_RV rpc_C_GetFunctionStatus(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 
 	BEGIN_CALL(C_GetFunctionStatus);
@@ -1176,6 +1244,8 @@ static CK_RV rpc_C_GetFunctionStatus(CallState * cs)
 
 static CK_RV rpc_C_CancelFunction(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 
 	BEGIN_CALL(C_CancelFunction);
@@ -1186,6 +1256,8 @@ static CK_RV rpc_C_CancelFunction(CallState * cs)
 
 static CK_RV rpc_C_GetSessionInfo(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_SESSION_INFO info;
 
@@ -1201,6 +1273,8 @@ static CK_RV rpc_C_GetSessionInfo(CallState * cs)
 
 static CK_RV rpc_C_InitPIN(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_UTF8CHAR_PTR pin;
 	CK_ULONG pin_len;
@@ -1214,6 +1288,8 @@ static CK_RV rpc_C_InitPIN(CallState * cs)
 
 static CK_RV rpc_C_SetPIN(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_UTF8CHAR_PTR old_pin;
 	CK_ULONG old_len;
@@ -1230,6 +1306,8 @@ static CK_RV rpc_C_SetPIN(CallState * cs)
 
 static CK_RV rpc_C_GetOperationState(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR operation_state;
 	DECLARE_CK_ULONG_PTR(operation_state_len);
@@ -1244,6 +1322,8 @@ static CK_RV rpc_C_GetOperationState(CallState * cs)
 
 static CK_RV rpc_C_SetOperationState(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR operation_state;
 	CK_ULONG operation_state_len;
@@ -1262,6 +1342,8 @@ static CK_RV rpc_C_SetOperationState(CallState * cs)
 
 static CK_RV rpc_C_Login(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_USER_TYPE user_type;
 	CK_UTF8CHAR_PTR pin;
@@ -1277,6 +1359,8 @@ static CK_RV rpc_C_Login(CallState * cs)
 
 static CK_RV rpc_C_Logout(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 
 	BEGIN_CALL(C_Logout);
@@ -1291,6 +1375,8 @@ static CK_RV rpc_C_Logout(CallState * cs)
 
 static CK_RV rpc_C_CreateObject(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_ATTRIBUTE_PTR template;
 	CK_ULONG count;
@@ -1306,6 +1392,8 @@ static CK_RV rpc_C_CreateObject(CallState * cs)
 
 static CK_RV rpc_C_CopyObject(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_OBJECT_HANDLE object;
 	CK_ATTRIBUTE_PTR template;
@@ -1323,6 +1411,8 @@ static CK_RV rpc_C_CopyObject(CallState * cs)
 
 static CK_RV rpc_C_DestroyObject(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_OBJECT_HANDLE object;
 
@@ -1335,6 +1425,8 @@ static CK_RV rpc_C_DestroyObject(CallState * cs)
 
 static CK_RV rpc_C_GetObjectSize(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_OBJECT_HANDLE object;
 	CK_ULONG size;
@@ -1349,6 +1441,8 @@ static CK_RV rpc_C_GetObjectSize(CallState * cs)
 
 static CK_RV rpc_C_GetAttributeValue(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_OBJECT_HANDLE object;
 	CK_ATTRIBUTE_PTR template;
@@ -1365,6 +1459,8 @@ static CK_RV rpc_C_GetAttributeValue(CallState * cs)
 
 static CK_RV rpc_C_SetAttributeValue(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_OBJECT_HANDLE object;
 	CK_ATTRIBUTE_PTR template;
@@ -1380,6 +1476,8 @@ static CK_RV rpc_C_SetAttributeValue(CallState * cs)
 
 static CK_RV rpc_C_FindObjectsInit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_ATTRIBUTE_PTR template;
 	CK_ULONG count;
@@ -1393,6 +1491,8 @@ static CK_RV rpc_C_FindObjectsInit(CallState * cs)
 
 static CK_RV rpc_C_FindObjects(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_OBJECT_HANDLE_PTR objects;
 	CK_ULONG max_object_count;
@@ -1408,6 +1508,8 @@ static CK_RV rpc_C_FindObjects(CallState * cs)
 
 static CK_RV rpc_C_FindObjectsFinal(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 
 	BEGIN_CALL(C_FindObjectsFinal);
@@ -1418,6 +1520,8 @@ static CK_RV rpc_C_FindObjectsFinal(CallState * cs)
 
 static CK_RV rpc_C_EncryptInit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE key;
@@ -1433,6 +1537,8 @@ static CK_RV rpc_C_EncryptInit(CallState * cs)
 
 static CK_RV rpc_C_Encrypt(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR data;
 	CK_ULONG data_len;
@@ -1451,6 +1557,8 @@ static CK_RV rpc_C_Encrypt(CallState * cs)
 
 static CK_RV rpc_C_EncryptUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR part;
 	CK_ULONG part_len;
@@ -1469,6 +1577,8 @@ static CK_RV rpc_C_EncryptUpdate(CallState * cs)
 
 static CK_RV rpc_C_EncryptFinal(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR last_encrypted_part;
 	DECLARE_CK_ULONG_PTR(last_encrypted_part_len);
@@ -1483,6 +1593,8 @@ static CK_RV rpc_C_EncryptFinal(CallState * cs)
 
 static CK_RV rpc_C_DecryptInit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE key;
@@ -1497,6 +1609,8 @@ static CK_RV rpc_C_DecryptInit(CallState * cs)
 
 static CK_RV rpc_C_Decrypt(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR encrypted_data;
 	CK_ULONG encrypted_data_len;
@@ -1515,6 +1629,8 @@ static CK_RV rpc_C_Decrypt(CallState * cs)
 
 static CK_RV rpc_C_DecryptUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR encrypted_part;
 	CK_ULONG encrypted_part_len;
@@ -1533,6 +1649,8 @@ static CK_RV rpc_C_DecryptUpdate(CallState * cs)
 
 static CK_RV rpc_C_DecryptFinal(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR last_part;
 	DECLARE_CK_ULONG_PTR(last_part_len);
@@ -1547,6 +1665,8 @@ static CK_RV rpc_C_DecryptFinal(CallState * cs)
 
 static CK_RV rpc_C_DigestInit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 
@@ -1559,6 +1679,8 @@ static CK_RV rpc_C_DigestInit(CallState * cs)
 
 static CK_RV rpc_C_Digest(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR data;
 	CK_ULONG data_len;
@@ -1576,6 +1698,8 @@ static CK_RV rpc_C_Digest(CallState * cs)
 
 static CK_RV rpc_C_DigestUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR part;
 	CK_ULONG part_len;
@@ -1589,6 +1713,8 @@ static CK_RV rpc_C_DigestUpdate(CallState * cs)
 
 static CK_RV rpc_C_DigestKey(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_OBJECT_HANDLE key;
 
@@ -1601,6 +1727,8 @@ static CK_RV rpc_C_DigestKey(CallState * cs)
 
 static CK_RV rpc_C_DigestFinal(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR digest;
 	DECLARE_CK_ULONG_PTR(digest_len);
@@ -1615,6 +1743,8 @@ static CK_RV rpc_C_DigestFinal(CallState * cs)
 
 static CK_RV rpc_C_SignInit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE key;
@@ -1629,6 +1759,8 @@ static CK_RV rpc_C_SignInit(CallState * cs)
 
 static CK_RV rpc_C_Sign(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR part;
 	CK_ULONG part_len;
@@ -1647,6 +1779,8 @@ static CK_RV rpc_C_Sign(CallState * cs)
 
 static CK_RV rpc_C_SignUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR part;
 	CK_ULONG part_len;
@@ -1660,6 +1794,8 @@ static CK_RV rpc_C_SignUpdate(CallState * cs)
 
 static CK_RV rpc_C_SignFinal(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR signature;
 	DECLARE_CK_ULONG_PTR(signature_len);
@@ -1674,6 +1810,8 @@ static CK_RV rpc_C_SignFinal(CallState * cs)
 
 static CK_RV rpc_C_SignRecoverInit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE key;
@@ -1688,6 +1826,8 @@ static CK_RV rpc_C_SignRecoverInit(CallState * cs)
 
 static CK_RV rpc_C_SignRecover(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR data;
 	CK_ULONG data_len;
@@ -1705,6 +1845,8 @@ static CK_RV rpc_C_SignRecover(CallState * cs)
 
 static CK_RV rpc_C_VerifyInit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE key;
@@ -1719,6 +1861,8 @@ static CK_RV rpc_C_VerifyInit(CallState * cs)
 
 static CK_RV rpc_C_Verify(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR data;
 	CK_ULONG data_len;
@@ -1735,6 +1879,8 @@ static CK_RV rpc_C_Verify(CallState * cs)
 
 static CK_RV rpc_C_VerifyUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR part;
 	CK_ULONG part_len;
@@ -1748,6 +1894,8 @@ static CK_RV rpc_C_VerifyUpdate(CallState * cs)
 
 static CK_RV rpc_C_VerifyFinal(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR signature;
 	CK_ULONG signature_len;
@@ -1761,6 +1909,8 @@ static CK_RV rpc_C_VerifyFinal(CallState * cs)
 
 static CK_RV rpc_C_VerifyRecoverInit(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE key;
@@ -1775,6 +1925,8 @@ static CK_RV rpc_C_VerifyRecoverInit(CallState * cs)
 
 static CK_RV rpc_C_VerifyRecover(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR signature;
 	CK_ULONG signature_len;
@@ -1792,6 +1944,8 @@ static CK_RV rpc_C_VerifyRecover(CallState * cs)
 
 static CK_RV rpc_C_DigestEncryptUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR part;
 	CK_ULONG part_len;
@@ -1810,6 +1964,8 @@ static CK_RV rpc_C_DigestEncryptUpdate(CallState * cs)
 
 static CK_RV rpc_C_DecryptDigestUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR encrypted_part;
 	CK_ULONG encrypted_part_len;
@@ -1828,6 +1984,8 @@ static CK_RV rpc_C_DecryptDigestUpdate(CallState * cs)
 
 static CK_RV rpc_C_SignEncryptUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR part;
 	CK_ULONG part_len;
@@ -1846,6 +2004,8 @@ static CK_RV rpc_C_SignEncryptUpdate(CallState * cs)
 
 static CK_RV rpc_C_DecryptVerifyUpdate(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR encrypted_part;
 	CK_ULONG encrypted_part_len;
@@ -1868,6 +2028,8 @@ static CK_RV rpc_C_DecryptVerifyUpdate(CallState * cs)
 
 static CK_RV rpc_C_GenerateKey(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_ATTRIBUTE_PTR template;
@@ -1885,6 +2047,8 @@ static CK_RV rpc_C_GenerateKey(CallState * cs)
 
 static CK_RV rpc_C_GenerateKeyPair(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_ATTRIBUTE_PTR public_key_template;
@@ -1910,6 +2074,8 @@ static CK_RV rpc_C_GenerateKeyPair(CallState * cs)
 
 static CK_RV rpc_C_WrapKey(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE wrapping_key;
@@ -1931,6 +2097,8 @@ static CK_RV rpc_C_WrapKey(CallState * cs)
 
 static CK_RV rpc_C_UnwrapKey(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE unwrapping_key;
@@ -1954,6 +2122,8 @@ static CK_RV rpc_C_UnwrapKey(CallState * cs)
 
 static CK_RV rpc_C_DeriveKey(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_MECHANISM mechanism;
 	CK_OBJECT_HANDLE base_key;
@@ -1974,6 +2144,8 @@ static CK_RV rpc_C_DeriveKey(CallState * cs)
 
 static CK_RV rpc_C_SeedRandom(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR seed;
 	CK_ULONG seed_len;
@@ -1987,6 +2159,8 @@ static CK_RV rpc_C_SeedRandom(CallState * cs)
 
 static CK_RV rpc_C_GenerateRandom(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_SESSION_HANDLE session;
 	CK_BYTE_PTR random_data;
 	DECLARE_CK_ULONG_PTR(random_len);
@@ -1995,6 +2169,8 @@ static CK_RV rpc_C_GenerateRandom(CallState * cs)
 	IN_ULONG(session);
 	IN_BYTE_BUFFER(random_data, random_len);
 	if (random_len == NULL_PTR) {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 		_ret = PARSE_ERROR; goto _cleanup;
 	}
 	PROCESS_CALL((session, random_data, *random_len));
@@ -2008,6 +2184,8 @@ static CK_RV rpc_C_GenerateRandom(CallState * cs)
 
 static int dispatch_call(CallState * cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *req, *resp;
 	CK_RV ret = CKR_OK;
 
@@ -2155,6 +2333,8 @@ static int dispatch_call(CallState * cs)
 
 static int read_all(CallState *cs, void *data, size_t len)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int r;
 
 	assert(cs->sock >= 0);
@@ -2187,6 +2367,8 @@ static int read_all(CallState *cs, void *data, size_t len)
 
 static int write_all(CallState *cs, void *data, size_t len)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int r;
 
 	assert(cs->sock >= 0);
@@ -2220,6 +2402,8 @@ static int write_all(CallState *cs, void *data, size_t len)
 
 static void run_dispatch_loop(CallState *cs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	unsigned char buf[4];
 	uint32_t len, res;
 	char hoststr[NI_MAXHOST], portstr[NI_MAXSERV];
@@ -2334,6 +2518,8 @@ static char pkcs11_socket_path[MAXPATHLEN] = { 0, };
 
 void gck_rpc_layer_accept(GckRpcTlsPskState *tls)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	struct sockaddr_storage addr;
 	DispatchState *ds, **here;
 	int error;
@@ -2439,6 +2625,8 @@ void gck_rpc_layer_inetd(CK_FUNCTION_LIST_PTR module)
  */
 static int _get_listening_socket(const char *proto, const char *host, const char *port)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	char hoststr[NI_MAXHOST], portstr[NI_MAXSERV];
 	struct addrinfo *ai, *first, hints;
 	int res, sock, one = 1;
@@ -2527,6 +2715,8 @@ static int _get_listening_socket(const char *proto, const char *host, const char
 
 int gck_rpc_layer_initialize(const char *prefix, CK_FUNCTION_LIST_PTR module)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	struct sockaddr_un addr;
 	int sock;
 
@@ -2622,6 +2812,8 @@ int gck_rpc_layer_initialize(const char *prefix, CK_FUNCTION_LIST_PTR module)
 
 void gck_rpc_layer_uninitialize(void)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	DispatchState *ds, *next;
 
 	if (!pkcs11_module)
@@ -2668,6 +2860,8 @@ void gck_rpc_layer_uninitialize(void)
  */
 static int _install_dispatch_syscall_filter(int use_tls)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 #ifdef SECCOMP
 	int rc = -1;
 	scmp_filter_ctx ctx;
