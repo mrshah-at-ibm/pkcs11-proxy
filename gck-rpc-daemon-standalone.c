@@ -225,7 +225,7 @@ int main(int argc, char *argv[])
 
         openlog("pkcs11-proxy",LOG_CONS|LOG_PID,LOG_DAEMON);
 
-	fprintf(stderr, "Loading library: $s\n", argv[1]);
+	fprintf(stderr, "Loading library: %s\n", argv[1]);
 	/* Load the library */
 	module = dlopen(argv[1], RTLD_NOW);
 	if (!module) {
