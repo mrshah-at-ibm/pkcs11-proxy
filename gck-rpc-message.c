@@ -36,6 +36,8 @@
 
 GckRpcMessage *gck_rpc_message_new(EggBufferAllocator allocator)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	GckRpcMessage *msg;
 
 	assert(allocator);
@@ -57,6 +59,8 @@ GckRpcMessage *gck_rpc_message_new(EggBufferAllocator allocator)
 
 void gck_rpc_message_free(GckRpcMessage * msg)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	EggBufferAllocator allocator;
 
 	if (msg) {
@@ -71,6 +75,8 @@ void gck_rpc_message_free(GckRpcMessage * msg)
 
 void gck_rpc_message_reset(GckRpcMessage * msg)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 
 	msg->call_id = 0;
@@ -85,6 +91,8 @@ void gck_rpc_message_reset(GckRpcMessage * msg)
 int
 gck_rpc_message_prep(GckRpcMessage * msg, int call_id, GckRpcMessageType type)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int len;
 
 	assert(type);
@@ -123,6 +131,8 @@ gck_rpc_message_prep(GckRpcMessage * msg, int call_id, GckRpcMessageType type)
 
 int gck_rpc_message_parse(GckRpcMessage * msg, GckRpcMessageType type)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	const unsigned char *val;
 	size_t len;
 	uint32_t call_id;
@@ -181,6 +191,8 @@ int gck_rpc_message_parse(GckRpcMessage * msg, GckRpcMessageType type)
 
 int gck_rpc_message_equals(GckRpcMessage * m1, GckRpcMessage * m2)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(m1 && m2);
 
 	/* Any errors and messages are never equal */
@@ -206,6 +218,8 @@ int gck_rpc_message_equals(GckRpcMessage * m1, GckRpcMessage * m2)
 
 int gck_rpc_message_verify_part(GckRpcMessage * msg, const char *part)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int len, ok;
 
 	if (!msg->sigverify)
@@ -222,6 +236,8 @@ int
 gck_rpc_message_write_attribute_buffer(GckRpcMessage * msg,
 				       CK_ATTRIBUTE_PTR arr, CK_ULONG num)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_ATTRIBUTE_PTR attr;
 	CK_ULONG i;
 
@@ -252,6 +268,8 @@ int
 gck_rpc_message_write_attribute_array(GckRpcMessage * msg,
 				      CK_ATTRIBUTE_PTR arr, CK_ULONG num)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_ULONG i;
 	CK_ATTRIBUTE_PTR attr;
 	unsigned char validity;
@@ -293,6 +311,8 @@ gck_rpc_message_write_attribute_array(GckRpcMessage * msg,
 
 int gck_rpc_message_read_byte(GckRpcMessage * msg, CK_BYTE * val)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 
 	/* Make sure this is in the right order */
@@ -303,6 +323,8 @@ int gck_rpc_message_read_byte(GckRpcMessage * msg, CK_BYTE * val)
 
 int gck_rpc_message_write_byte(GckRpcMessage * msg, CK_BYTE val)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 
 	/* Make sure this is in the right order */
@@ -312,6 +334,8 @@ int gck_rpc_message_write_byte(GckRpcMessage * msg, CK_BYTE val)
 
 int gck_rpc_message_read_ulong(GckRpcMessage * msg, CK_ULONG * val)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	uint64_t v;
 	assert(msg);
 
@@ -327,6 +351,8 @@ int gck_rpc_message_read_ulong(GckRpcMessage * msg, CK_ULONG * val)
 
 int gck_rpc_message_write_ulong(GckRpcMessage * msg, CK_ULONG val)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 
 	/* Make sure this is in the rigth order */
@@ -336,6 +362,8 @@ int gck_rpc_message_write_ulong(GckRpcMessage * msg, CK_ULONG val)
 
 int gck_rpc_message_write_byte_buffer(GckRpcMessage * msg, CK_BYTE_PTR arr, CK_ULONG *count_ptr)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	uint8_t flags;
 	assert(msg);
 
@@ -359,6 +387,8 @@ int
 gck_rpc_message_write_byte_array(GckRpcMessage * msg, CK_BYTE_PTR arr,
 				 CK_ULONG num)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 
 	/* Make sure this is in the right order */
@@ -378,6 +408,8 @@ gck_rpc_message_write_byte_array(GckRpcMessage * msg, CK_BYTE_PTR arr,
 
 int gck_rpc_message_write_ulong_buffer(GckRpcMessage * msg, CK_ULONG count)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 
 	/* Make sure this is in the right order */
@@ -389,6 +421,8 @@ int
 gck_rpc_message_write_ulong_array(GckRpcMessage * msg, CK_ULONG_PTR array,
 				  CK_ULONG n_array)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	CK_ULONG i;
 
 	assert(msg);
@@ -411,6 +445,8 @@ gck_rpc_message_write_ulong_array(GckRpcMessage * msg, CK_ULONG_PTR array,
 
 int gck_rpc_message_read_version(GckRpcMessage * msg, CK_VERSION * version)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 	assert(version);
 
@@ -425,6 +461,8 @@ int gck_rpc_message_read_version(GckRpcMessage * msg, CK_VERSION * version)
 
 int gck_rpc_message_write_version(GckRpcMessage * msg, CK_VERSION * version)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 	assert(version);
 
@@ -441,6 +479,8 @@ int
 gck_rpc_message_read_space_string(GckRpcMessage * msg, CK_UTF8CHAR * buffer,
 				  CK_ULONG length)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	const unsigned char *data;
 	size_t n_data;
 
@@ -469,6 +509,8 @@ int
 gck_rpc_message_write_space_string(GckRpcMessage * msg, CK_UTF8CHAR * buffer,
 				   CK_ULONG length)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	assert(msg);
 	assert(buffer);
 	assert(length);

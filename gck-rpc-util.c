@@ -32,6 +32,8 @@
 
 static void do_log(const char *pref, const char *msg, va_list va)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	char buffer[1024];
 	size_t len = 0;
 
@@ -46,6 +48,8 @@ static void do_log(const char *pref, const char *msg, va_list va)
 
 void gck_rpc_warn(const char *msg, ...)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	va_list va;
 	va_start(va, msg);
 	do_log("WARNING", msg, va);
@@ -54,6 +58,8 @@ void gck_rpc_warn(const char *msg, ...)
 
 void gck_rpc_debug(const char *msg, ...)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	va_list va;
 	va_start(va, msg);
 	do_log("DEBUG", msg, va);
@@ -62,6 +68,8 @@ void gck_rpc_debug(const char *msg, ...)
 
 int gck_rpc_mechanism_is_supported(CK_MECHANISM_TYPE mech)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	if (gck_rpc_mechanism_has_no_parameters(mech) ||
 	    gck_rpc_mechanism_has_sane_parameters(mech))
 		return 1;
@@ -71,6 +79,8 @@ int gck_rpc_mechanism_is_supported(CK_MECHANISM_TYPE mech)
 void
 gck_rpc_mechanism_list_purge(CK_MECHANISM_TYPE_PTR mechs, CK_ULONG * n_mechs)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	int i;
 
 	assert(mechs);
@@ -92,6 +102,8 @@ gck_rpc_mechanism_list_purge(CK_MECHANISM_TYPE_PTR mechs, CK_ULONG * n_mechs)
 
 int gck_rpc_mechanism_has_sane_parameters(CK_MECHANISM_TYPE type)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	/* This list is incomplete */
 	switch (type) {
 	case CKM_RSA_PKCS_OAEP:
@@ -104,6 +116,8 @@ int gck_rpc_mechanism_has_sane_parameters(CK_MECHANISM_TYPE type)
 
 int gck_rpc_mechanism_has_no_parameters(CK_MECHANISM_TYPE mech)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	/* This list is incomplete */
 
 	switch (mech) {
@@ -205,6 +219,8 @@ int gck_rpc_mechanism_has_no_parameters(CK_MECHANISM_TYPE mech)
 int
 gck_rpc_has_ulong_parameter(CK_ATTRIBUTE_TYPE type)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	switch (type) {
 	case CKA_CLASS:
 	case CKA_KEY_TYPE:
@@ -220,6 +236,8 @@ gck_rpc_has_ulong_parameter(CK_ATTRIBUTE_TYPE type)
 int
 gck_rpc_has_bad_sized_ulong_parameter(CK_ATTRIBUTE_PTR attr)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	if (!attr->pValue)
 		return 0;
 	/* All this parameters are transmited on the network
@@ -252,6 +270,8 @@ gck_rpc_has_bad_sized_ulong_parameter(CK_ATTRIBUTE_PTR attr)
  */
 int gck_rpc_parse_host_port(const char *prefix, char **host, char **port)
 {
+	fprintf(stderr, "Entering %s\n", __FUNCTION__);
+
 	char *p = NULL;
 	int is_ipv6;
 
